@@ -10,10 +10,10 @@ Application provides
  - implements a rest [api](https://github.com/antonsjava/sb-sampler/blob/main/src/main/java/sk/antons/sbsampler/rest/book/BookController.java) for providing that jdbc api
  - [configure](https://github.com/antonsjava/sb-sampler/blob/main/src/main/java/sk/antons/sbsampler/rest/RestConf.java#L40) logging for rest api (also for ws api)
  - [configure](https://github.com/antonsjava/sb-sampler/blob/main/src/main/java/sk/antons/sbsampler/rest/JsonExceptionAdvice.java) rest api to log exceptions and convert them to json
- - implements a rest [client](https://github.com/antonsjava/sb-sampler/blob/main/src/main/java/sk/antons/sbsampler/rest/book/BookRestClient.java) using RestTemplate
+ - implements a rest [client](https://github.com/antonsjava/sb-sampler/blob/main/src/main/java/sk/antons/sbsampler/rest/book/BookRestClient.java) using RestTemplate and configure to [log](https://github.com/antonsjava/sb-sampler/blob/main/src/main/java/sk/antons/sbsampler/rest/book/BookClientConf.java#L69) req/res
  - implements a [soap web service](https://github.com/antonsjava/sb-sampler/blob/main/src/main/resources/META-INF/book/BookService.wsdl) which receive requests and storees them as xml files in ./target/fs/input
  - implements a soap web service [client](https://github.com/antonsjava/sb-sampler/blob/main/src/main/java/sk/antons/sbsampler/ws/book/BookServiceClient.java) using spring web service which logs requests and responses
- - implements integration flow which reads ./target/fs/input dir and process soap requests by calling rest api and moving files to backup od file folder
+ - implements integration [flow](https://github.com/antonsjava/sb-sampler/blob/main/src/main/java/sk/antons/sbsampler/flow/XmlFlowConfigurator.java#L75) which reads ./target/fs/input dir and process soap requests by calling rest api and moving files to backup od file folder
 
 to test rest 
 ~~~
@@ -33,4 +33,7 @@ curl -X POST -H "Content-Type: text/xml" -d '<SOAP-ENV:Envelope xmlns:SOAP-ENV="
 ~~~
 
 This is example of [log](https://github.com/antonsjava/sb-sampler/blob/main/src/main/other-resources/application.log) which is produced by calling implemented soap web service client 
+ - ws is called - file is stored to input dir
+ - file is processed by flow - rest service ja called using rest client
+ - rest service is called and book is sdored to db
 
