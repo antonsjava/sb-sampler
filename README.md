@@ -34,6 +34,6 @@ curl -X POST -H "Content-Type: text/xml" -d '<SOAP-ENV:Envelope xmlns:SOAP-ENV="
 
 This is example of [log](https://github.com/antonsjava/sb-sampler/blob/main/src/main/other-resources/application.log) which is produced by calling implemented soap web service client 
  - ws is called - file is stored to input dir
- - file is processed by flow - rest service ja called using rest client
- - rest service is called and book is sdored to db
+ - file is processed by flow - rest service is called using rest client
+ - rest service is called and book is stored to db
 
