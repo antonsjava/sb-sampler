@@ -1,0 +1,135 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2023-12-30 10:52:30 [ main] INF s.antons.sbsampler.Application: Starting Application using Java 17.0.9 with PID 14324 (/home/projects/my/antonsjava/sb-sampler/target/classes started by antons in /home/projects/my/antonsjava/sb-sampler)
+2023-12-30 10:52:30 [ main] DEB s.antons.sbsampler.Application: Running with Spring Boot v3.2.0, Spring v6.1.1
+2023-12-30 10:52:30 [ main] INF s.antons.sbsampler.Application: No active profile set, falling back to 1 default profile: "default"
+2023-12-30 10:52:31 [ main] INF guringBeanFactoryPostProcessor: No bean named 'errorChannel' has been explicitly defined. Therefore, a default PublishSubscribeChannel will be created.
+2023-12-30 10:52:31 [ main] INF guringBeanFactoryPostProcessor: No bean named 'integrationHeaderChannelRegistry' has been explicitly defined. Therefore, a default DefaultHeaderChannelRegistry will be created.
+2023-12-30 10:52:31 [ main] WAR egate$BeanPostProcessorChecker: Bean 'wsConfig' of type [sk.antons.sbsampler.ws.WsConfig$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [annotationActionEndpointMapping]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2023-12-30 10:52:31 [ main] WAR egate$BeanPostProcessorChecker: Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [annotationActionEndpointMapping] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2023-12-30 10:52:31 [ main] INF nnotationActionEndpointMapping: Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2023-12-30 10:52:32 [ main] INF    o.s.b.w.e.t.TomcatWebServer: Tomcat initialized with port 8080 (http)
+2023-12-30 10:52:32 [ main] INF     o.a.c.core.StandardService: Starting service [Tomcat]
+2023-12-30 10:52:32 [ main] INF      o.a.c.core.StandardEngine: Starting Servlet engine: [Apache Tomcat/10.1.16]
+2023-12-30 10:52:32 [ main] INF    o.a.c.c.C.[.[localhost].[/]: Initializing Spring embedded WebApplicationContext
+2023-12-30 10:52:32 [ main] INF letWebServerApplicationContext: Root WebApplicationContext: initialization completed in 2241 ms
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+2023-12-30 10:52:32 [ main] INF            message.rest.server: rest conf: 
+---- case -------
+  when request: request.path->starts(/actuator/)
+  do: doNothing
+---- case -------
+  when request: request.path->starts(/ws/)
+  do: [enabled=true, requestStartPrefix=REQ, requestPrefix=REQ, requestPayload, responsePrefix=RES, responsePayload]
+---- case -------
+  when request: request.path->starts(/rest/)
+  do: [enabled=true, requestStartPrefix=REQ, requestPrefix=REQ, requestPayload, responsePrefix=RES, responsePayload]
+---- case -------
+  when request: true
+  do: [enabled=true, requestStartPrefix=REQX, requestPrefix=REQ, responsePrefix=RES]
+2023-12-30 10:52:32 [ main] INF  s.a.sbsampler.flow.FileSystem: path ./target/fs/input creating
+2023-12-30 10:52:32 [ main] INF  s.a.sbsampler.flow.FileSystem: path ./target/fs/input created true
+2023-12-30 10:52:32 [ main] INF  s.a.sbsampler.flow.FileSystem: path ./target/fs/backup creating
+2023-12-30 10:52:32 [ main] INF  s.a.sbsampler.flow.FileSystem: path ./target/fs/backup created true
+2023-12-30 10:52:32 [ main] INF  s.a.sbsampler.flow.FileSystem: path ./target/fs/fail creating
+2023-12-30 10:52:32 [ main] INF  s.a.sbsampler.flow.FileSystem: path ./target/fs/fail created true
+2023-12-30 10:52:32 [ main] INF    c.z.hikari.HikariDataSource: HikariPool-1 - Starting...
+2023-12-30 10:52:33 [ main] INF     c.z.hikari.pool.HikariPool: HikariPool-1 - Added connection conn1: url=jdbc:h2:./target/db/books.h2 user=USER
+2023-12-30 10:52:33 [ main] INF    c.z.hikari.HikariDataSource: HikariPool-1 - Start completed.
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [1][1] statement: select count(*) from authors time: 10 error: org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "AUTHORS" not found (this database is empty); SQL statement:
+select count(*) from authors [42104-224]
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [1] rollback time: 0
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: problem to connect database java.lang.reflect.UndeclaredThrowableException
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: probably not initiated yet try to initialize
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][2] statement: create table authors (id varchar(50) primary key, name varchar(5000)) result: 0 time: 3
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][2] statement: create table books (id varchar(50) primary key, title varchar(500), abstrct varchar(10000), author varchar(50)) result: 0 time: 2
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][2] statement: create index books_author ON books (author) result: 0 time: 2
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2] commit time: 0
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into authors (id, name) values ('t1', 'Test Author') result: 1 time: 3
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('tb1', 'some book', 'bla bla bla bla bla bla bla bla bla bla', 't1') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into authors (id, name) values ('a1', 'J. K. Rowling') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jkr1', 'Harry Potter - Philosopher''s Stone', 'bla bla bla bla bla bla bla bla bla bla', 'a1') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jkr2', 'Harry Potter - Chamber of Secrets', 'bla bla bla bla bla bla bla bla bla bla', 'a1') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jkr3', 'Harry Potter - Prisoner of Azkaban', 'bla bla bla bla bla bla bla bla bla bla', 'a1') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jkr4', 'Harry Potter - Goblet of Fire', 'bla bla bla bla bla bla bla bla bla bla', 'a1') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jkr5', 'Harry Potter - Order of the Phoenix', 'bla bla bla bla bla bla bla bla bla bla', 'a1') result: 1 time: 0
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jkr6', 'Harry Potter - Half-Blood Prince', 'bla bla bla bla bla bla bla bla bla bla', 'a1') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jkr7', 'Harry Potter - Deathly Hallows', 'bla bla bla bla bla bla bla bla bla bla', 'a1') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into authors (id, name) values ('a2', 'James Clavell') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jc1', 'King Rat', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.', 'a2') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jc2', 'Tai-pan', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.', 'a2') result: 1 time: 2
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jc3', 'Šógun', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.', 'a2') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jc4', 'Noble House', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.', 'a2') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jc5', 'Whirlwind', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.', 'a2') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2][3] statement: insert into books (id, title, abstrct, author) values ('jc6', 'Gai-jin', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.', 'a2') result: 1 time: 1
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2] commit time: 4
+2023-12-30 10:52:33 [ main] INF    s.a.sbsampler.repo.BookRepo: jdbc [2] rollback time: 1
+2023-12-30 10:52:33 [ main] INF s.a.s.flow.XmlFlowConfigurator: Creating file reading flow for directory ./target/fs/input
+2023-12-30 10:52:34 [ main] INF .b.a.e.w.EndpointLinksResolver: Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: Adding {logging-channel-adapter:_org.springframework.integration.errorLogger} as a subscriber to the 'errorChannel' channel
+2023-12-30 10:52:34 [ main] INF .s.i.c.PublishSubscribeChannel: Channel 'sbsampler.errorChannel' has 1 subscriber(s).
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: started bean '_org.springframework.integration.errorLogger'
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: Adding {header-enricher} as a subscriber to the 'xmlFileReadingFlow.channel#0' channel
+2023-12-30 10:52:34 [ main] INF    o.s.i.channel.DirectChannel: Channel 'sbsampler.xmlFileReadingFlow.channel#0' has 1 subscriber(s).
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: started bean 'xmlFileReadingFlow.org.springframework.integration.config.ConsumerEndpointFactoryBean#0'; defined in: 'class path resource [sk/antons/sbsampler/flow/XmlFlowConfigurator.class]'; from source: 'bean method xmlFileReadingFlow'
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: Adding {service-activator} as a subscriber to the 'xmlFileReadingFlow.channel#1' channel
+2023-12-30 10:52:34 [ main] INF    o.s.i.channel.DirectChannel: Channel 'sbsampler.xmlFileReadingFlow.channel#1' has 1 subscriber(s).
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: started bean 'xmlFileReadingFlow.org.springframework.integration.config.ConsumerEndpointFactoryBean#1'; defined in: 'class path resource [sk/antons/sbsampler/flow/XmlFlowConfigurator.class]'; from source: 'bean method xmlFileReadingFlow'
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: Adding {service-activator} as a subscriber to the 'xmlFileReadingFlow.channel#2' channel
+2023-12-30 10:52:34 [ main] INF    o.s.i.channel.DirectChannel: Channel 'sbsampler.xmlFileReadingFlow.channel#2' has 1 subscriber(s).
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: started bean 'xmlFileReadingFlow.org.springframework.integration.config.ConsumerEndpointFactoryBean#2'; defined in: 'class path resource [sk/antons/sbsampler/flow/XmlFlowConfigurator.class]'; from source: 'bean method xmlFileReadingFlow'
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: Adding {service-activator} as a subscriber to the 'xmlFileReadingFlow.channel#3' channel
+2023-12-30 10:52:34 [ main] INF    o.s.i.channel.DirectChannel: Channel 'sbsampler.xmlFileReadingFlow.channel#3' has 1 subscriber(s).
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: started bean 'xmlFileReadingFlow.org.springframework.integration.config.ConsumerEndpointFactoryBean#3'; defined in: 'class path resource [sk/antons/sbsampler/flow/XmlFlowConfigurator.class]'; from source: 'bean method xmlFileReadingFlow'
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: Adding {service-activator} as a subscriber to the 'xmlFileReadingFlow.channel#4' channel
+2023-12-30 10:52:34 [ main] INF    o.s.i.channel.DirectChannel: Channel 'sbsampler.xmlFileReadingFlow.channel#4' has 1 subscriber(s).
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: started bean 'xmlFileReadingFlow.org.springframework.integration.config.ConsumerEndpointFactoryBean#4'; defined in: 'class path resource [sk/antons/sbsampler/flow/XmlFlowConfigurator.class]'; from source: 'bean method xmlFileReadingFlow'
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: Adding {service-activator} as a subscriber to the 'xmlFileReadingFlow.channel#5' channel
+2023-12-30 10:52:34 [ main] INF    o.s.i.channel.DirectChannel: Channel 'sbsampler.xmlFileReadingFlow.channel#5' has 1 subscriber(s).
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: started bean 'xmlFileReadingFlow.org.springframework.integration.config.ConsumerEndpointFactoryBean#5'; defined in: 'class path resource [sk/antons/sbsampler/flow/XmlFlowConfigurator.class]'; from source: 'bean method xmlFileReadingFlow'
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: Adding {service-activator} as a subscriber to the 'xmlFileReadingFlow.channel#6' channel
+2023-12-30 10:52:34 [ main] INF    o.s.i.channel.DirectChannel: Channel 'sbsampler.xmlFileReadingFlow.channel#6' has 1 subscriber(s).
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: started bean 'xmlFileReadingFlow.org.springframework.integration.config.ConsumerEndpointFactoryBean#6'; defined in: 'class path resource [sk/antons/sbsampler/flow/XmlFlowConfigurator.class]'; from source: 'bean method xmlFileReadingFlow'
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: Adding {service-activator} as a subscriber to the 'xmlFileReadingErrorChannel' channel
+2023-12-30 10:52:34 [ main] INF    o.s.i.channel.DirectChannel: Channel 'sbsampler.xmlFileReadingErrorChannel' has 1 subscriber(s).
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: started bean 'xmlFileReadingErrorFlow.org.springframework.integration.config.ConsumerEndpointFactoryBean#0'; defined in: 'class path resource [sk/antons/sbsampler/flow/XmlFlowConfigurator.class]'; from source: 'bean method xmlFileReadingErrorFlow'
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: Adding {service-activator} as a subscriber to the 'xmlFileReadingErrorFlow.channel#0' channel
+2023-12-30 10:52:34 [ main] INF    o.s.i.channel.DirectChannel: Channel 'sbsampler.xmlFileReadingErrorFlow.channel#0' has 1 subscriber(s).
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: started bean 'xmlFileReadingErrorFlow.org.springframework.integration.config.ConsumerEndpointFactoryBean#1'; defined in: 'class path resource [sk/antons/sbsampler/flow/XmlFlowConfigurator.class]'; from source: 'bean method xmlFileReadingErrorFlow'
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: Adding {service-activator} as a subscriber to the 'xmlFileReadingErrorFlow.channel#1' channel
+2023-12-30 10:52:34 [ main] INF    o.s.i.channel.DirectChannel: Channel 'sbsampler.xmlFileReadingErrorFlow.channel#1' has 1 subscriber(s).
+2023-12-30 10:52:34 [ main] INF    o.s.i.e.EventDrivenConsumer: started bean 'xmlFileReadingErrorFlow.org.springframework.integration.config.ConsumerEndpointFactoryBean#2'; defined in: 'class path resource [sk/antons/sbsampler/flow/XmlFlowConfigurator.class]'; from source: 'bean method xmlFileReadingErrorFlow'
+2023-12-30 10:52:34 [ main] INF .e.SourcePollingChannelAdapter: started bean 'xmlFileReadingFlow.org.springframework.integration.config.SourcePollingChannelAdapterFactoryBean#0'; defined in: 'class path resource [sk/antons/sbsampler/flow/XmlFlowConfigurator.class]'; from source: 'bean method xmlFileReadingFlow'
+2023-12-30 10:52:35 [ main] INF    o.s.b.w.e.t.TomcatWebServer: Tomcat started on port 8080 (http) with context path ''
+2023-12-30 10:52:35 [ main] INF s.antons.sbsampler.Application: Started Application in 5.451 seconds (process running for 5.793)
+2023-12-30 10:52:55 [xec-1] INF    o.a.c.c.C.[.[localhost].[/]: Initializing Spring MessageDispatcherServlet 'messageDispatcherServlet'
+2023-12-30 10:52:55 [xec-1] INF w.t.h.MessageDispatcherServlet: Initializing Servlet 'messageDispatcherServlet'
+2023-12-30 10:52:55 [xec-1] INF s.w.s.s.SaajSoapMessageFactory: Creating SAAJ 1.3 MessageFactory with SOAP 1.1 Protocol
+2023-12-30 10:52:55 [xec-1] INF w.t.h.MessageDispatcherServlet: Completed initialization in 24 ms
+2023-12-30 10:52:55 [xec-1] INF            message.rest.server: REQ[1] POST /ws/book vvv
+2023-12-30 10:52:55 [xec-1] INF            message.rest.server: REQ[1] POST /ws/book payload[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body><ns3:updateBookRequest xmlns:ns3="http://sample.antons.sk/book/1.0"><book><title>pokus</title><abstract>something long</abstract><author>t1</author></book></ns3:updateBookRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>] size: 326
+2023-12-30 10:52:55 [xec-1] INF            message.rest.server: RES[1] POST /ws/book status: 200 time: 322 payload[<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header/><SOAP-ENV:Body><ns3:updateResponse xmlns:ns3="http://sample.antons.sk/book/1.0"><code>1</code><note>file saved to 1703929952534-2023-12-30.xml</note></ns3:updateResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>] size: 302
+2023-12-30 10:53:35 [ing-1] DEB  s.a.s.rest.RestTemplateClient: req[1] POST http://localhost:8080/rest/book
+2023-12-30 10:53:35 [ing-1] INF            message.rest.client: http-req[1] POST http://localhost:8080/rest/book body[{"title":"pokus","abstractText":"something long","author":{"id":"t1"}}]
+2023-12-30 10:53:35 [xec-3] INF    o.a.c.c.C.[.[localhost].[/]: Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-30 10:53:35 [xec-3] INF      o.s.w.s.DispatcherServlet: Initializing Servlet 'dispatcherServlet'
+2023-12-30 10:53:35 [xec-3] INF      o.s.w.s.DispatcherServlet: Completed initialization in 3 ms
+2023-12-30 10:53:35 [xec-3] INF            message.rest.server: REQ[2] POST /rest/book vvv
+2023-12-30 10:53:35 [xec-3] INF    s.a.sbsampler.repo.BookRepo: jdbc [3][4] statement: select name from authors where id = ? params:  ?1:t1 time: 10
+2023-12-30 10:53:35 [xec-3] INF    s.a.sbsampler.repo.BookRepo: jdbc [3][5] statement: insert into books (id, title, abstrct, author) values (?, ?, ?, ?) params:  ?1:1703929952718 ?2:pokus ?3:something long ?4:t1 result: 1 time: 1
+2023-12-30 10:53:35 [xec-3] INF    s.a.sbsampler.repo.BookRepo: jdbc [3] commit time: 0
+2023-12-30 10:53:35 [xec-3] INF    s.a.sbsampler.repo.BookRepo: jdbc [3] rollback time: 0
+2023-12-30 10:53:35 [xec-3] INF            message.rest.server: REQ[2] POST /rest/book payload[{"title":"pokus","abstractText":"something long","author":{"id":"t1"}}] size: 70
+2023-12-30 10:53:35 [xec-3] INF            message.rest.server: RES[2] POST /rest/book status: 200 time: 122 payload[1703929952718] size: 13
+2023-12-30 10:53:35 [ing-1] INF            message.rest.client: http-res[1] POST http://localhost:8080/rest/book status:200 time:9 body[1703929952718]
+2023-12-30 10:53:35 [ing-1] DEB  s.a.s.rest.RestTemplateClient: res[1] POST http://localhost:8080/rest/book status: 200, time: 236
+2023-12-30 10:53:35 [ing-1] ERR   s.a.s.f.h.FileProcessHandler: file 1703929952534-2023-12-30.xml processing done
+2023-12-30 10:53:35 [ing-1] ERR    s.a.s.f.h.FileBackupHandler: file 1703929952534-2023-12-30.xml processing done {}
+2023-12-30 10:53:36 [ead-3] DEB s.a.s.flow.XmlFlowConfigurator: stop processing

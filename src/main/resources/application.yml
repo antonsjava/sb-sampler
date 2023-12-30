@@ -29,6 +29,10 @@ spring:
     pool-size: 5
     dump: true
 
+filesystem:
+  input.dir: ./target/fs/input
+  backup.dir: ./target/fs/backup
+  fail.dir: ./target/fs/fail
 
 rest:
   book:
