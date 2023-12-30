@@ -1,0 +1,41 @@
+debug: false
+
+spring.jackson.serialization.indent_output: true
+spring.jackson.default-property-inclusion: non_null
+
+logging:
+  level:
+    ROOT: INFO
+    sk: DEBUG
+    message: ERROR
+    message.rest.server: INFO
+    message.rest.client: INFO
+    message.ws.client: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%5.5thread] %-3.-3level %30.30logger{30}: %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%5.5thread] %-3.-3level %30.30logger{30}: %msg%n"
+  file: ./target/application.log
+
+
+spring:
+  application:
+    name: sbsampler
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: "jdbc:h2:./target/db/books.h2;MODE=PostgreSQL;AUTO_SERVER=TRUE"
+    databaseName: books
+    username: user
+    password: pass
+    pool-size: 5
+    dump: true
+
+
+rest:
+  book:
+    endpoint: http://localhost:8080/rest
+    dump: true
+
+ws:
+  book:
+    endpoint: http://localhost:8080/ws/book
+    dump: true

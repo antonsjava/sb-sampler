@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.0</version>
+    </parent>
+    
+    <groupId>io.github.antonsjava</groupId>
+    <artifactId>sb-sampler</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <java.version>17</java.version>
+        <mapstruct.version>1.5.3.Final</mapstruct.version>
+        <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
+        <openapi.version>2.0.2</openapi.version>
+        <therapi-runtime-javadoc.version>0.15.0</therapi-runtime-javadoc.version>
+        <spring-cloud.version>2023.0.0</spring-cloud.version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-file</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>wsdl4j</groupId>
+            <artifactId>wsdl4j</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.14</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>io.github.antonsjava</groupId>
+            <artifactId>jaul</artifactId>
+            <version>1.34</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.antonsjava</groupId>
+            <artifactId>json</artifactId>
+            <version>1.17</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.antonsjava</groupId>
+            <artifactId>charmap</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.antonsjava</groupId>
+            <artifactId>log-servlet-filter</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.antonsjava</groupId>
+            <artifactId>tostringer</artifactId>
+            <version>1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.antonsjava</groupId>
+            <artifactId>si-utils</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.antonsjava</groupId>
+            <artifactId>sb-utils</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.antonsjava</groupId>
+            <artifactId>jdbc</artifactId>
+            <version>1.4</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+
+		<!-- TODO: temporary -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.therapi</groupId>
+            <artifactId>therapi-runtime-javadoc</artifactId>
+            <version>0.15.0</version>
+        </dependency>
+        <!-- TODO: temporary end -->
+        
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+                <configuration>
+                    <!-- we dont need java artifact deployed -->
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <version>4.0.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
+                            <defaultOptions>
+                                <bindingFiles>
+                                    <bindingFile>${basedir}/src/main/resources/META-INF/jaxws/bindings.complex.xjb</bindingFile>
+                                </bindingFiles>
+                            </defaultOptions>
+                            <wsdlOptions>
+                                <wsdlOption>
+                                    <wsdl>${basedir}/src/main/resources/META-INF/book/BookService.wsdl</wsdl>
+                                    <wsdlLocation>META-INF/book/BookService.wsdl</wsdlLocation>
+                                    <packagenames>
+                                        <packagename>http://sample.antons.sk/book/1.0=sk.antons.sbsampler.ws.book</packagename>
+                                    </packagenames>
+                                    <extraargs>
+                                        <extraarg>-verbose</extraarg>
+                                    </extraargs>
+                                </wsdlOption>
+                            </wsdlOptions>
+                            <additionalJvmArgs>-Djavax.xml.accessExternalDTD=all</additionalJvmArgs>
+                        </configuration>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.github.therapi</groupId>
+                            <artifactId>therapi-runtime-javadoc-scribe</artifactId>
+                            <version>${therapi-runtime-javadoc.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>${lombok-mapstruct-binding.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <doclet>sk.antons.sb.rest.doclet.SBRestDoclet</doclet>
+                    <docletPath>${basedir}/target/classes</docletPath>
+                    <docletArtifacts>
+                        <docletArtifact>
+                            <groupId>io.github.antonsjava</groupId>
+                            <artifactId>sb-rest-doclet</artifactId>
+                            <version>1.12</version>
+                        </docletArtifact>
+                        <docletArtifact>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <version>${project.version}</version>
+                        </docletArtifact>
+                    </docletArtifacts>
+                    <additionalOptions>
+                        -exclude camp.xit.zvjs.cip.rfo.api.internal
+                    </additionalOptions>
+                    <useStandardDocletOptions>true</useStandardDocletOptions>
+                    <includeDependencySources>true</includeDependencySources>
+                    <dependencySourceIncludes>
+                        <dependencySourceInclude>${project.groupId}:${project.artifactId}:${project.version}</dependencySourceInclude>
+                    </dependencySourceIncludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>rest-doc</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

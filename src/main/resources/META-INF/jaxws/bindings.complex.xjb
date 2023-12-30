@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings 
+    xmlns="https://jakarta.ee/xml/ns/jaxb" 
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    version="3.0">
+
+    <globalBindings generateElementProperty="false">
+        <xjc:simple />
+    </globalBindings>
+ 
+    <bindings schemaLocation="../book/book.xsd">
+        <bindings node="//xs:complexType[@name='Book']">
+            <class name="WsBook" />
+        </bindings>
+        <bindings node="//xs:complexType[@name='Author']">
+            <class name="WsAuthor" />
+        </bindings>
+    </bindings>
+
+</bindings>

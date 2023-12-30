@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+		xmlns:tns="http://sample.antons.sk/book/1.0"
+		targetNamespace="http://sample.antons.sk/book/1.0" version="1.0">
+
+  
+  <xs:complexType name="Author">
+	<xs:sequence>
+	  <xs:element minOccurs="0" maxOccurs="1" name="id" type="xs:string"/>
+	  <xs:element minOccurs="1" maxOccurs="1" name="name" type="xs:string"/>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:element name="Author" type="tns:Author"/>
+  
+  <xs:complexType name="Book">
+	<xs:sequence>
+	  <xs:element minOccurs="0" maxOccurs="1" name="id" type="xs:string"/>
+	  <xs:element minOccurs="1" maxOccurs="1" name="title" type="xs:string"/>
+	  <xs:element minOccurs="1" maxOccurs="1" name="abstract" type="xs:string"/>
+	  <xs:element minOccurs="1" maxOccurs="1" name="author" type="xs:string"/>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:element name="Book" type="tns:Book"/>
+  
+  <xs:element name="updateBookRequest" type="tns:updateBookRequest"/>
+  <xs:complexType name="updateBookRequest">
+	<xs:sequence>
+	  <xs:element minOccurs="1" maxOccurs="1" name="book" type="tns:Book"/>
+	</xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="updateAuthorRequest" type="tns:updateAuthorRequest"/>
+  <xs:complexType name="updateAuthorRequest">
+	<xs:sequence>
+	  <xs:element minOccurs="1" maxOccurs="1" name="author" type="tns:Author"/>
+	</xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="updateResponse" type="tns:updateResponse"/>
+  <xs:complexType name="updateResponse">
+	<xs:sequence>
+	  <xs:element minOccurs="0" maxOccurs="1" name="code" type="xs:string"/>
+	  <xs:element minOccurs="0" maxOccurs="1" name="note" type="xs:string"/>
+	</xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
