@@ -15,6 +15,7 @@ Application provides
  - implements a soap web service [client](https://github.com/antonsjava/sb-sampler/blob/main/src/main/java/sk/antons/sbsampler/ws/book/BookServiceClient.java) using spring web service which logs requests and responses
  - implements integration [flow](https://github.com/antonsjava/sb-sampler/blob/main/src/main/java/sk/antons/sbsampler/flow/XmlFlowConfigurator.java#L75) which reads ./target/fs/input dir and process soap requests by calling rest api and moving files to backup od file folder
 
+## sb-sampler
 to test rest 
 ~~~
 curl 'http://localhost:8080/rest/book?title=Potter'
@@ -36,4 +37,12 @@ This is example of [log](https://github.com/antonsjava/sb-sampler/blob/main/src/
  - ws is called - file is stored to input dir
  - file is processed by flow - rest service is called using rest client
  - rest service is called and book is stored to db
+
+## rest doc
+
+if you want to see usage of io.github.antonsjava:sb-rest-doclet you can start 
+~~~
+mvn javadoc::javadoc
+~~~
+and look to ./target/site/apidocs/index-rest.html (most of code is not documented) 
 

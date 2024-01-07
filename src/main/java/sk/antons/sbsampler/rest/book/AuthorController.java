@@ -33,6 +33,11 @@ import org.springframework.web.bind.annotation.RestController;
 import sk.antons.sbsampler.model.Author;
 import sk.antons.sbsampler.service.BookService;
 
+/**
+ * Author manipulation api. Allows to create modify and delete authors.
+ *
+ * @author antons
+ */
 @RestController
 @RequestMapping(path="/rest")
 public class AuthorController {
@@ -40,6 +45,11 @@ public class AuthorController {
 
     @Autowired BookService service;
 
+    /**
+     * Searches authors by name.
+     * @param name name substring
+     * @return matched authors
+     */
     @GetMapping(path="/author"
         , produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -49,6 +59,11 @@ public class AuthorController {
          return service.authorSearch(name);
     }
 
+    /**
+     * Reads author by id.
+     * @param id id od author
+     * @return authord data
+     */
     @GetMapping(path="/author/{id}"
         , produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -56,6 +71,11 @@ public class AuthorController {
         return service.authorRead(id);
     }
 
+    /**
+     * Create new author. Id myust be empty and name must be distinct.
+     * @param author author data
+     * @return id of new created author
+     */
     @PostMapping(path="/author"
         , produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -63,6 +83,10 @@ public class AuthorController {
         return service.authorCreate(author);
     }
 
+    /**
+     * Modify existing author. Id must not be emptu
+     * @param author authors data
+     */
     @PutMapping(path="/author"
         , produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -70,6 +94,10 @@ public class AuthorController {
         service.authorUpdate(author);
     }
 
+    /**
+     * Deletes authro by id.
+     * @param id id od author to be deleted
+     */
     @DeleteMapping(path="/author/{id}"
         , produces = MediaType.APPLICATION_JSON_VALUE
     )

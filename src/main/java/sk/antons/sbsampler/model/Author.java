@@ -18,12 +18,18 @@ package sk.antons.sbsampler.model;
 import lombok.Data;
 
 /**
- *
+ * Author data
  * @author antons
  */
 @Data
 public class Author {
+    /**
+     * Technical id of author.
+     */
     private String id;
+    /**
+     * Name of author.
+     */
     private String name;
 
     public static Author idOnly(String id) {

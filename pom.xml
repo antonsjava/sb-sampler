@@ -251,7 +251,7 @@
                         </docletArtifact>
                     </docletArtifacts>
                     <additionalOptions>
-                        -exclude camp.xit.zvjs.cip.rfo.api.internal
+                        -exclude sk.antons.sbsampler.rest.mongo
                     </additionalOptions>
                     <useStandardDocletOptions>true</useStandardDocletOptions>
                     <includeDependencySources>true</includeDependencySources>
