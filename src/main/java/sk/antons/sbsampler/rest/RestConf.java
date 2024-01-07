@@ -65,6 +65,7 @@ public class RestConf {
             .inCase() // log as jsons
                 .request()
                     .path().startsWith("/rest/")
+                    .or().path().startsWith("/mongo/")
                     .done()
                 .conf()
                     .requestPayloadFormatter(LogFilter.Body.Json.instance().forceOneLine(true).cutStringLiterals(200).format())

@@ -89,7 +89,7 @@
         <dependency>
             <groupId>io.github.antonsjava</groupId>
             <artifactId>log-servlet-filter</artifactId>
-            <version>3.0</version>
+            <version>3.4</version>
         </dependency>
         <dependency>
             <groupId>io.github.antonsjava</groupId>
@@ -109,6 +109,11 @@
         <dependency>
             <groupId>io.github.antonsjava</groupId>
             <artifactId>jdbc</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.antonsjava</groupId>
+            <artifactId>jmom</artifactId>
             <version>1.4</version>
         </dependency>
         
