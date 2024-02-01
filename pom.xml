@@ -89,7 +89,7 @@
         <dependency>
             <groupId>io.github.antonsjava</groupId>
             <artifactId>log-servlet-filter</artifactId>
-            <version>3.4</version>
+            <version>3.5</version>
         </dependency>
         <dependency>
             <groupId>io.github.antonsjava</groupId>
@@ -104,7 +104,7 @@
         <dependency>
             <groupId>io.github.antonsjava</groupId>
             <artifactId>sb-utils</artifactId>
-            <version>3.1</version>
+            <version>3.4</version>
         </dependency>
         <dependency>
             <groupId>io.github.antonsjava</groupId>
@@ -115,6 +115,11 @@
             <groupId>io.github.antonsjava</groupId>
             <artifactId>jmom</artifactId>
             <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.antonsjava</groupId>
+            <artifactId>mimic-servlet</artifactId>
+            <version>1.0</version>
         </dependency>
         
         <dependency>

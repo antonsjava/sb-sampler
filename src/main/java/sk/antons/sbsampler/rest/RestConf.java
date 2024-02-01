@@ -24,7 +24,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import sk.antons.servlet.filter.LogFilter;
+import sk.antons.servlet.mimic.MimicServlet;
+import sk.antons.servlet.mimic.builder.ProcessorBuilder;
 /**
  *
  * @author antons
@@ -82,10 +85,69 @@ public class RestConf {
                 .done()
             .build();
 
-        log.info("rest conf: {}", filter.configurationInfo());
+        log.info("rest log conf: {}", filter.configurationInfo());
 
         return filter;
 
+    }
+
+    // some mock api
+    @Bean
+    public ServletRegistrationBean exampleServletBean() {
+        MimicServlet servlet = MimicServlet.builder()
+            .inCase()
+                .when()
+                    .path().equals("/mock/json")
+                    .done()
+                .process(MimicServlet.processor()
+                    .content("{\"name\":\"john\", \"age\": 20}")
+                    .contentType("application/json")
+                    .build())
+            .inCase()
+                .when()
+                    .path().equals("/mock/xml")
+                    .done()
+                .process(MimicServlet.processor()
+                    .content("<person><name>john</name><age>20</age></person>")
+                    .contentType("application/xml")
+                    .build())
+            .inCase()
+                .when()
+                    .path().equals("/mock/testsoap")
+                    .and().method().equals("POST")
+                    .and().xmlContent("Body", "Person", "Name").contains("ex")
+                    .done()
+                .process(MimicServlet.processor()
+                    .content("<SOAP-ENV:Envelope xmlns:SOAP-ENV =\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi =\"http://www.w3.org/1999/XMLSchema-instance\" xmlns:xsd =\"http://www.w3.org/1999/XMLSchema\"><SOAP-ENV:Body><SOAP-ENV:Fault><faultcode xsi:type =\"xsd:string\">SOAP-ENV:Client</faultcode><faultstring xsi:type =\"xsd:string\">Failed to locate method (ValidateCreditCard) in class (examplesCreditCard) at /usr/local/ActivePerl-5.6/lib/site_perl/5.6.0/SOAP/Lite.pm line 1555.</faultstring></SOAP-ENV:Fault></SOAP-ENV:Body></SOAP-ENV:Envelope>")
+                    .contentType("application/soap+xml")
+                    .build())
+            .inCase()
+                .when()
+                    .path().equals("/mock/testsoap")
+                    .and().method().equals("POST")
+                    .done()
+                .process(MimicServlet.processor()
+                    .content("<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:ns2=\"http://www.tekelec.com/sds/\"><SOAP-ENV:Header></SOAP-ENV:Header><SOAP-ENV:Body><ns2:sdsResult affected=\"affected\" error=\"error\" description=\"description\">        </ns2:sdsResult></SOAP-ENV:Body></SOAP-ENV:Envelope>")
+                    .contentType("application/soap+xml")
+                    .build())
+            .inCase()
+                .when()
+                    .path().equals("/mock/gen")
+                    .done()
+                .process((req, res) -> {
+                    ProcessorBuilder.ProcessorHelper helper = ProcessorBuilder.ProcessorHelper.instance(req, res);
+                    String param = helper.request().getParameter("name");
+                    if(param == null) param = "noname";
+                    helper.contentAsText("person "+param+" " + System.currentTimeMillis());
+                    helper.response().setContentType("text/plain");
+                    return true;
+                })
+            .build();
+        log.info("mimic conf: {}", servlet.configurationInfo());
+        ServletRegistrationBean bean = new ServletRegistrationBean(
+          servlet, "/mock/*");
+        bean.setLoadOnStartup(1);
+        return bean;
     }
 
 }

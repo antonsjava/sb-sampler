@@ -46,3 +46,31 @@ mvn javadoc::javadoc
 ~~~
 and look to ./target/site/apidocs/index-rest.html (most of code is not documented) 
 
+
+## mimic servlet
+
+if you want to mock some static data you can look to RestConf how to configure servlet to provide some dummy data.  
+
+~~~
+curl -X POST -d '
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope">
+  <env:Body>
+    <Person>
+      <Name>Peter</Name>
+    </Person>
+  </env:Body>
+</env:Envelope>
+' http://localhost:8080/mock/testsoap
+~~~
+
+~~~
+curl -X POST -d '
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope">
+  <env:Body>
+    <Person>
+      <Name>Petex</Name>
+    </Person>
+  </env:Body>
+</env:Envelope>
+' http://localhost:8080/mock/testsoap
+~~~
